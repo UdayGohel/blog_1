@@ -1,0 +1,33 @@
+#dash_container {
+    /* border: 2px solid rgb(234, 255, 4); */
+    margin-top: 8rem;
+}
+
+#admin_table {
+    margin-top: 5rem;
+}
+
+#total_Count {
+    border: 3px solid rgb(7, 7, 162);
+    border-radius: 1em;
+}
+
+.bi {
+    color: rgb(0, 0, 0);
+}
+
+.bi-trash-fill:hover {
+    color: rgb(216, 10, 10);
+}
+
+.bi-pencil-square:hover {
+    color: rgb(0, 21, 255);
+}
+
+#admin_table_body {
+    background-color: #dcdbc5;
+}
+
+#dash_body {
+    background-color: #c5dcc6;
+}
