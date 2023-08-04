@@ -5,6 +5,7 @@ use App\Http\Controllers\Manageblog;
 use App\Http\Controllers\Registration;
 use App\Http\Controllers\SadminController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,26 +26,28 @@ Route::get('/signout', [Registration::class, 'logout'])->name('user_signout');
 
 // Routes For Admin Control
 
-Route::get('/admin/dashboard', [Admin::class, 'dashboard'])->name('admin_dashborad');
 // User Management
-Route::get('/admin/AddUser', [Admin::class, 'AddUser'])->name('admin_AddUser');
-Route::post('/admin/user/registration', [Admin::class, 'register'])->name('admin_user_register');
-Route::get('/admin/manageUser', [Admin::class, 'manageuser'])->name('admin_manageUser');
-Route::get('/admin/manageUser/editUser/{id}', [Admin::class, 'edituser'])->name('admin_editUser');
-Route::post('/admin/user/update/{id}', [Admin::class, 'update'])->name('admin_user_update');
-Route::get('/admin/deleteUser/{id}', [Admin::class, 'delete'])->name('admin_deleteUser');
-Route::get('/admin/Addcategory', [Admin::class, 'Addcategory'])->name('admin_Addcategory');
-Route::post('/admin/Addcategory', [Admin::class, 'category_register'])->name('admin_category_register');
-Route::get('/admin/managecategory', [Admin::class, 'manage_category'])->name('admin_manage_category');
-Route::get('/admin/deletecategory/{id}', [Admin::class, 'delete_category'])->name('admin_deletecategory');
-Route::get('/admin/category/update/{id}', [Admin::class, 'edit_category'])->name('admin_edit_category');
-Route::post('/admin/category/update/{id}', [Admin::class, 'update_category'])->name('admin_category_update');
-Route::get('/admin/Add_post', [Admin::class, 'Add_post'])->name('admin_Add_post');
-Route::post('/admin/Add_post', [Admin::class, 'post_register'])->name('admin_post_register');
-Route::get('/admin/managepost', [Admin::class, 'manage_post'])->name('admin_manage_post');
-Route::get('/admin/managepost/editpost/{id}', [Admin::class, 'editpost'])->name('admin_editpost');
-Route::post('/admin/post/update/{id}', [Admin::class, 'update_post'])->name('admin_post_update');
-Route::get('/admin/deletepost/{id}', [Admin::class, 'deletepost'])->name('admin_deletepost');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/dashboard', [Admin::class, 'dashboard'])->name('admin_dashborad');
+    Route::get('/AddUser', [Admin::class, 'AddUser'])->name('admin_AddUser');
+    Route::post('/user/registration', [Admin::class, 'register'])->name('admin_user_register');
+    Route::get('/manageUser', [Admin::class, 'manageuser'])->name('admin_manageUser');
+    Route::get('/manageUser/editUser/{id}', [Admin::class, 'edituser'])->name('admin_editUser');
+    Route::post('/user/update/{id}', [Admin::class, 'update'])->name('admin_user_update');
+    Route::get('/deleteUser/{id}', [Admin::class, 'delete'])->name('admin_deleteUser');
+    Route::get('/Addcategory', [Admin::class, 'Addcategory'])->name('admin_Addcategory');
+    Route::post('/Addcategory', [Admin::class, 'category_register'])->name('admin_category_register');
+    Route::get('/managecategory', [Admin::class, 'manage_category'])->name('admin_manage_category');
+    Route::get('/deletecategory/{id}', [Admin::class, 'delete_category'])->name('admin_deletecategory');
+    Route::get('/category/update/{id}', [Admin::class, 'edit_category'])->name('admin_edit_category');
+    Route::post('/category/update/{id}', [Admin::class, 'update_category'])->name('admin_category_update');
+    Route::get('/Add_post', [Admin::class, 'Add_post'])->name('admin_Add_post');
+    Route::post('/Add_post', [Admin::class, 'post_register'])->name('admin_post_register');
+    Route::get('/managepost', [Admin::class, 'manage_post'])->name('admin_manage_post');
+    Route::get('/managepost/editpost/{id}', [Admin::class, 'editpost'])->name('admin_editpost');
+    Route::post('/post/update/{id}', [Admin::class, 'update_post'])->name('admin_post_update');
+    Route::get('/deletepost/{id}', [Admin::class, 'deletepost'])->name('admin_deletepost');
+});
 
 // Route for viewing posts and Category-Post :-
 Route::get('/blog', [Manageblog::class, 'blog'])->name('user_blog');
@@ -59,7 +62,10 @@ Route::get('/search', [Manageblog::class, 'search'])->name('user_search');
 
 //Group Of Route That Defines All superAdmin Route !!
 
-Route::group(['prefix' => 'Sadmin'], function () {
-    Route::get('/dashBoard', [SadminController::class, 'showDashboard'])->name('sAdmin_dash');
-    Route::get('/manageAdmin', [SadminController::class, 'manageAdmin'])->name('adminManage');
+Route::group(['prefix' => 'sadmin'], function () {
+    Route::get('/dashboard', [SadminController::class, 'showDashboard'])->name('sAdmin_dash');
+    Route::get('/manage_admin', [SadminController::class, 'manageAdmin'])->name('adminManage');
+    Route::get('/manage_post', [SadminController::class, 'manage_post'])->name('sadmin_managepost');
+    Route::get('/manage_category', [SadminController::class, 'manage_category'])->name('sadmin_manageCategory');
+    Route::get('/manage_user', [SadminController::class, 'manage_user'])->name('sadmin_manageUser');
 });
